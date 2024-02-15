@@ -6,24 +6,48 @@
 //
 
 import UIKit
+import SnapKit
 
 class TagViewController: BaseViewController {
+    
+    let textField = UITextField()
+    
+    var tagText: ((String) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        textField.becomeFirstResponder()
     }
-    */
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        tagText?(textField.text!)
+    }
+    
+    override func configureHierarchy() {
+        view.addSubview(textField)
+    }
+    
+    override func configureLayout() {
+        textField.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.height.equalTo(40)
+        }
+    }
+    
+    override func configureView() {
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = .systemBackground
+        textField.font = .systemFont(ofSize: 15)
+        textField.placeholder = "태그를 입력해주세요."
+    }
 
 }

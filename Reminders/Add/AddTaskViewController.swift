@@ -21,17 +21,18 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         navigationItem.title = "새로운 할 일"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        navigationItem.rightBarButtonItem?.isEnabled = false
         
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
     }
     
     @objc func leftBarButtonTapped() {
-        
+        dismiss(animated: true)
     }
     
     @objc func rightBarButtonTapped() {
-        
+        // DB에 저장
     }
     
     @objc func deadlineReceivedNotification(notification: NSNotification) {
@@ -39,7 +40,7 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd"
             dateString = dateFormatter.string(from: value)
-            mainView.tableView.reloadData() //왜안되지...
+            mainView.tableView.cellForRow(at: IndexPath(row: 0, section: AddTask.deadline.rawValue))?.detailTextLabel?.text = dateString
         }
     }
 
@@ -60,11 +61,16 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: "value1Cell")
-        cell.textLabel?.text = AddTask(rawValue: indexPath.section)?.title
-        cell.detailTextLabel?.text = dateString
-        cell.accessoryType = .disclosureIndicator
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: MemoTableViewCell.identifier, for: indexPath) as! MemoTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "value1Cell")
+            cell.textLabel?.text = AddTask(rawValue: indexPath.section)?.title
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -75,9 +81,17 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
         case .deadline:
             transition(style: .push, viewController: DeadlineViewController.self)
         case .tag:
-            transition(style: .push, viewController: TagViewController.self)
+            let vc = TagViewController()
+            vc.tagText = {
+                tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = $0
+            }
+            navigationController?.pushViewController(vc, animated: true)
         case .priority:
-            transition(style: .push, viewController: PriorityViewController.self)
+            let vc = PriorityViewController()
+            vc.selectedIndex = {
+                tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = Priority(rawValue: $0)?.title
+            }
+            navigationController?.pushViewController(vc, animated: true)
         case .image:
             break
         }

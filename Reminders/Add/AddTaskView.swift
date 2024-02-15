@@ -63,7 +63,7 @@ class AddTaskView: BaseView {
     override func configureView() {
         tableView.backgroundColor = .clear
         tableView.sectionHeaderHeight = 0
-        tableView.register(AddTaskTableViewCell.self, forCellReuseIdentifier: AddTaskTableViewCell.identifier)
+        tableView.register(MemoTableViewCell.self, forCellReuseIdentifier: MemoTableViewCell.identifier)
     }
     
 }

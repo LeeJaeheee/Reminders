@@ -21,11 +21,12 @@
 		D21633542B7CE220002529D6 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21633532B7CE220002529D6 /* AddTaskViewController.swift */; };
 		D21633562B7CE718002529D6 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21633552B7CE718002529D6 /* AddTaskView.swift */; };
 		D21633592B7CEC61002529D6 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21633582B7CEC61002529D6 /* ReusableProtocol.swift */; };
-		D216335C2B7CECD5002529D6 /* AddTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D216335B2B7CECD5002529D6 /* AddTaskTableViewCell.swift */; };
 		D216335E2B7D0F29002529D6 /* DeadlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D216335D2B7D0F29002529D6 /* DeadlineViewController.swift */; };
 		D21633602B7D0F47002529D6 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D216335F2B7D0F47002529D6 /* TagViewController.swift */; };
 		D21633622B7D0F5C002529D6 /* PriorityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21633612B7D0F5C002529D6 /* PriorityViewController.swift */; };
 		D21633642B7D1278002529D6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21633632B7D1278002529D6 /* BaseViewController.swift */; };
+		D2E26F122B7DF58B00CF1F4B /* MemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F112B7DF58B00CF1F4B /* MemoTableViewCell.swift */; };
+		D2E26F142B7DF60C00CF1F4B /* ConfigureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F132B7DF60C00CF1F4B /* ConfigureProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,11 +45,12 @@
 		D21633532B7CE220002529D6 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		D21633552B7CE718002529D6 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		D21633582B7CEC61002529D6 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
-		D216335B2B7CECD5002529D6 /* AddTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskTableViewCell.swift; sourceTree = "<group>"; };
 		D216335D2B7D0F29002529D6 /* DeadlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineViewController.swift; sourceTree = "<group>"; };
 		D216335F2B7D0F47002529D6 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		D21633612B7D0F5C002529D6 /* PriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewController.swift; sourceTree = "<group>"; };
 		D21633632B7D1278002529D6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		D2E26F112B7DF58B00CF1F4B /* MemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTableViewCell.swift; sourceTree = "<group>"; };
+		D2E26F132B7DF60C00CF1F4B /* ConfigureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +112,10 @@
 			children = (
 				D21633532B7CE220002529D6 /* AddTaskViewController.swift */,
 				D21633552B7CE718002529D6 /* AddTaskView.swift */,
-				D216335B2B7CECD5002529D6 /* AddTaskTableViewCell.swift */,
 				D216335D2B7D0F29002529D6 /* DeadlineViewController.swift */,
 				D216335F2B7D0F47002529D6 /* TagViewController.swift */,
 				D21633612B7D0F5C002529D6 /* PriorityViewController.swift */,
+				D2E26F112B7DF58B00CF1F4B /* MemoTableViewCell.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				D21633582B7CEC61002529D6 /* ReusableProtocol.swift */,
+				D2E26F132B7DF60C00CF1F4B /* ConfigureProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -223,8 +226,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D216334B2B7C803F002529D6 /* BaseCustomViewController.swift in Sources */,
-				D216335C2B7CECD5002529D6 /* AddTaskTableViewCell.swift in Sources */,
 				D21633542B7CE220002529D6 /* AddTaskViewController.swift in Sources */,
+				D2E26F122B7DF58B00CF1F4B /* MemoTableViewCell.swift in Sources */,
 				D21633592B7CEC61002529D6 /* ReusableProtocol.swift in Sources */,
 				D21633602B7D0F47002529D6 /* TagViewController.swift in Sources */,
 				D21633642B7D1278002529D6 /* BaseViewController.swift in Sources */,
@@ -235,6 +238,7 @@
 				D21633312B7C7F66002529D6 /* AppDelegate.swift in Sources */,
 				D21633622B7D0F5C002529D6 /* PriorityViewController.swift in Sources */,
 				D21633332B7C7F66002529D6 /* SceneDelegate.swift in Sources */,
+				D2E26F142B7DF60C00CF1F4B /* ConfigureProtocol.swift in Sources */,
 				D21633492B7C8035002529D6 /* BaseView.swift in Sources */,
 				D216334D2B7C808E002529D6 /* HomeViewController.swift in Sources */,
 			);
