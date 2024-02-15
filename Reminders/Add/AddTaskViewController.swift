@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     
-    var dateString: String = ""
+    var deadline: Date?
+    var tag: String?
+    var priority: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,6 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         navigationItem.title = "새로운 할 일"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(rightBarButtonTapped))
-        navigationItem.rightBarButtonItem?.isEnabled = false
         
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
@@ -33,14 +35,32 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     
     @objc func rightBarButtonTapped() {
         // DB에 저장
+        let cell = mainView.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MemoTableViewCell
+        if let title = cell.titleTextField.text, !title.isEmpty, let deadline, let priority, let tag {
+            
+            let realm = try! Realm()
+            print(realm.configuration.fileURL)
+            
+            let memo = cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
+            let data = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
+            
+            try! realm.write {
+                realm.add(data)
+                print("Realm Create")
+            }
+            dismiss(animated: true)
+        } else {
+            showAlert(title: "ㅇㅇ", message: "ㅇㅇㅇㅇ")
+        }
     }
     
     @objc func deadlineReceivedNotification(notification: NSNotification) {
         if let value = notification.userInfo?[AddTask.deadline] as? Date {
+            deadline = value
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd"
-            dateString = dateFormatter.string(from: value)
-            mainView.tableView.cellForRow(at: IndexPath(row: 0, section: AddTask.deadline.rawValue))?.detailTextLabel?.text = dateString
+            mainView.tableView.cellForRow(at: IndexPath(row: 0, section: AddTask.deadline.rawValue))?.detailTextLabel?.text = dateFormatter.string(from: value)
         }
     }
 
@@ -83,12 +103,14 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
         case .tag:
             let vc = TagViewController()
             vc.tagText = {
+                self.tag = $0.isEmpty ? $0 : nil
                 tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = $0
             }
             navigationController?.pushViewController(vc, animated: true)
         case .priority:
             let vc = PriorityViewController()
             vc.selectedIndex = {
+                self.priority = $0
                 tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = Priority(rawValue: $0)?.title
             }
             navigationController?.pushViewController(vc, animated: true)
