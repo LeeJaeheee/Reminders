@@ -28,6 +28,21 @@ enum AddTask: Int, CaseIterable {
             "이미지 추가"
         }
     }
+    
+    var notiName: String {
+        switch self {
+        case .memo:
+            ""
+        case .deadline:
+            "DeadlineReceived"
+        case .tag:
+            "TagReceived"
+        case .priority:
+            "PriorityReceived"
+        case .image:
+            ""
+        }
+    }
 }
 
 class AddTaskView: BaseView {
@@ -47,6 +62,9 @@ class AddTaskView: BaseView {
     
     override func configureView() {
         tableView.backgroundColor = .clear
+        tableView.sectionHeaderHeight = 0
+        tableView.register(AddTaskTableViewCell.self, forCellReuseIdentifier: AddTaskTableViewCell.identifier)
     }
     
 }
+

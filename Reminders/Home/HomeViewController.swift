@@ -12,7 +12,7 @@ protocol HomeViewDelegate {
     func rightBarButtonTapped()
 }
 
-class HomeViewController: BaseViewController<HomeView> {
+class HomeViewController: BaseCustomViewController<HomeView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,6 @@ class HomeViewController: BaseViewController<HomeView> {
     
     override func configureView() {
         mainView.delegate = self
-        
         
     }
 
