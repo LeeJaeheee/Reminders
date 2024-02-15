@@ -30,6 +30,9 @@
 		D2E26F172B7E0C8300CF1F4B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D2E26F162B7E0C8300CF1F4B /* Realm */; };
 		D2E26F192B7E0C8300CF1F4B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D2E26F182B7E0C8300CF1F4B /* RealmSwift */; };
 		D2E26F1C2B7E0CE200CF1F4B /* TaskTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F1B2B7E0CE200CF1F4B /* TaskTable.swift */; };
+		D2E26F1E2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F1D2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift */; };
+		D2E26F212B7E4B5800CF1F4B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */; };
+		D2E26F232B7E63F900CF1F4B /* HomeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		D2E26F112B7DF58B00CF1F4B /* MemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTableViewCell.swift; sourceTree = "<group>"; };
 		D2E26F132B7DF60C00CF1F4B /* ConfigureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureProtocol.swift; sourceTree = "<group>"; };
 		D2E26F1B2B7E0CE200CF1F4B /* TaskTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTable.swift; sourceTree = "<group>"; };
+		D2E26F1D2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				D2E26F1A2B7E0CA600CF1F4B /* Database */,
-				D21633452B7C7FC7002529D6 /* Add */,
 				D21633442B7C7FB6002529D6 /* Home */,
+				D2E26F242B7E647E00CF1F4B /* Detail */,
+				D21633452B7C7FC7002529D6 /* Add */,
 				D21633472B7C8009002529D6 /* Util */,
 				D21633302B7C7F66002529D6 /* AppDelegate.swift */,
 				D21633322B7C7F66002529D6 /* SceneDelegate.swift */,
@@ -110,6 +117,8 @@
 			children = (
 				D216334C2B7C808E002529D6 /* HomeViewController.swift */,
 				D216334E2B7C80B6002529D6 /* HomeView.swift */,
+				D2E26F1D2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift */,
+				D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -140,6 +149,7 @@
 		D21633472B7C8009002529D6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				D2E26F1F2B7E4B4900CF1F4B /* Extension */,
 				D21633572B7CEC52002529D6 /* Protocol */,
 				D21633462B7C7FE1002529D6 /* Base */,
 			);
@@ -161,6 +171,21 @@
 				D2E26F1B2B7E0CE200CF1F4B /* TaskTable.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		D2E26F1F2B7E4B4900CF1F4B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D2E26F242B7E647E00CF1F4B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,17 +268,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E26F232B7E63F900CF1F4B /* HomeCollection.swift in Sources */,
 				D216334B2B7C803F002529D6 /* BaseCustomViewController.swift in Sources */,
 				D21633542B7CE220002529D6 /* AddTaskViewController.swift in Sources */,
 				D2E26F122B7DF58B00CF1F4B /* MemoTableViewCell.swift in Sources */,
 				D21633592B7CEC61002529D6 /* ReusableProtocol.swift in Sources */,
 				D21633602B7D0F47002529D6 /* TagViewController.swift in Sources */,
+				D2E26F1E2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift in Sources */,
 				D21633642B7D1278002529D6 /* BaseViewController.swift in Sources */,
 				D216335E2B7D0F29002529D6 /* DeadlineViewController.swift in Sources */,
 				D216334F2B7C80B6002529D6 /* HomeView.swift in Sources */,
 				D21633562B7CE718002529D6 /* AddTaskView.swift in Sources */,
 				D21633352B7C7F66002529D6 /* ViewController.swift in Sources */,
 				D21633312B7C7F66002529D6 /* AppDelegate.swift in Sources */,
+				D2E26F212B7E4B5800CF1F4B /* UIView+Extension.swift in Sources */,
 				D21633622B7D0F5C002529D6 /* PriorityViewController.swift in Sources */,
 				D21633332B7C7F66002529D6 /* SceneDelegate.swift in Sources */,
 				D2E26F142B7DF60C00CF1F4B /* ConfigureProtocol.swift in Sources */,
