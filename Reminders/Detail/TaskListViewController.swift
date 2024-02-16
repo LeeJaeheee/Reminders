@@ -38,25 +38,16 @@ class TaskListViewController: BaseViewController {
     }
     
     func setBarButton() {
-        let items = UIMenu(title: "정렬 기준", options: .displayInline, children: [
-            UIAction(title: "마감일", state: .on, handler: { _ in
-                
-            }),
-            UIAction(title: "제목", handler: { _ in
-                
-            }),
-            UIAction(title: "우선순위", handler: { _ in
-                
-            })
+        
+        let items = UIMenu(title: "정렬 기준", options: [.singleSelection, .displayInline], children: [
+            UIAction(title: "마감일", state: .on, handler: { _ in }),
+            UIAction(title: "제목", handler: { _ in }),
+            UIAction(title: "우선순위", handler: { _ in })
         ])
         
-        let sortType = UIMenu(title: "정렬 순서",options: .displayInline, children: [
-            UIAction(title: "오름차순", state: .on, handler: { _ in
-                
-            }),
-            UIAction(title: "내림차순", handler: { _ in
-                
-            })
+        let sortType = UIMenu(title: "정렬 순서", options: [.singleSelection, .displayInline], children: [
+            UIAction(title: "오름차순", state: .on, handler: { _ in }),
+            UIAction(title: "내림차순", handler: { _ in })
         ])
         
         let button = UIButton()
@@ -64,7 +55,9 @@ class TaskListViewController: BaseViewController {
         button.menu = UIMenu(children: [items, sortType])
         button.showsMenuAsPrimaryAction = true
         //button.changesSelectionAsPrimaryAction = true
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        
     }
 
 }
