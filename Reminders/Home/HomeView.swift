@@ -35,7 +35,16 @@ class HomeView: BaseView {
     }
     
     override func configureView() {
-        let leftBarButton = UIBarButtonItem(title: "새로운 미리 알림", image: UIImage(systemName: "plus.circle.fill"), target: self, action: #selector(leftBarButtonTapped))
+        var config = UIButton.Configuration.plain()
+        config.imagePadding = 4
+        config.contentInsets = .zero
+        let button = UIButton(configuration: config, primaryAction: UIAction(handler: { _ in
+            self.leftBarButtonTapped()
+        }))
+        button.setTitle("새로운 미리 알림", for: .normal)
+        button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+        
+        let leftBarButton = UIBarButtonItem(customView: button)
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let rightBarButton = UIBarButtonItem(title: "목록 추가")
         toolbar.items = [leftBarButton, spacer, rightBarButton]
