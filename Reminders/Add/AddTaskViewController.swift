@@ -36,12 +36,13 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     @objc func rightBarButtonTapped() {
         // DB에 저장
         let cell = mainView.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MemoTableViewCell
+        
         if let title = cell.titleTextField.text, !title.isEmpty, let deadline, let priority, let tag {
             
             let realm = try! Realm()
             print(realm.configuration.fileURL)
             
-            let memo = cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
+            let memo = !cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
             let data = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
             
             try! realm.write {
@@ -103,7 +104,7 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
         case .tag:
             let vc = TagViewController()
             vc.tagText = {
-                self.tag = $0.isEmpty ? $0 : nil
+                self.tag = !$0.isEmpty ? $0 : nil
                 tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = $0
             }
             navigationController?.pushViewController(vc, animated: true)

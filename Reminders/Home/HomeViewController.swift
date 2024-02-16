@@ -24,33 +24,6 @@ class HomeViewController: BaseCustomViewController<HomeView> {
         
         navigationItem.title = "전체"
         
-        let items = UIMenu(title: "정렬 기준", options: .displayInline, children: [
-            UIAction(title: "마감일", handler: { _ in
-                
-            }),
-            UIAction(title: "제목", handler: { _ in
-                
-            }),
-            UIAction(title: "우선순위", handler: { _ in
-                
-            })
-        ])
-        
-        let sortType = UIMenu(title: "정렬 순서",options: .displayInline, children: [
-            UIAction(title: "오름차순", handler: { _ in
-                
-            }),
-            UIAction(title: "내림차순", handler: { _ in
-                
-            })
-        ])
-        
-        let button = UIButton()
-        button.menu = UIMenu(children: [items, sortType])
-        button.showsMenuAsPrimaryAction = true
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
-        
         mainView.delegate = self
         
         mainView.collectionView.delegate = self
@@ -89,12 +62,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.countLabel.text = "\(homeCollection.database.count)"
         
+        //FIXME: 테스트하고 지우기
+        if indexPath.row == 0 {
+            cell.countLabel.text = "\(homeCollection.today.count)"
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == HomeCollection.all.rawValue {
-            
+            navigationController?.pushViewController(TaskListViewController(), animated: true)
         }
     }
     

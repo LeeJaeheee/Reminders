@@ -48,6 +48,11 @@ enum HomeCollection: Int, CaseIterable {
         }
     }
     
+    //FIXME: 지우고 아래 database에서 쿼리로 다시하기
+    var today: LazyFilterSequence<Results<TaskTable>> {
+        HomeCollection.realm.objects(TaskTable.self).filter { Calendar.current.isDateInToday($0.deadline) }
+    }
+    
     var database: Results<TaskTable> {
         switch self {
         case .today:

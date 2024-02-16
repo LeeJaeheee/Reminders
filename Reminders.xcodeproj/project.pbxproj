@@ -33,6 +33,7 @@
 		D2E26F1E2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F1D2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift */; };
 		D2E26F212B7E4B5800CF1F4B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */; };
 		D2E26F232B7E63F900CF1F4B /* HomeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */; };
+		D2E26F262B7E650400CF1F4B /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F252B7E650400CF1F4B /* TaskListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		D2E26F1D2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollection.swift; sourceTree = "<group>"; };
+		D2E26F252B7E650400CF1F4B /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 		D2E26F242B7E647E00CF1F4B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				D2E26F252B7E650400CF1F4B /* TaskListViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				D21633352B7C7F66002529D6 /* ViewController.swift in Sources */,
 				D21633312B7C7F66002529D6 /* AppDelegate.swift in Sources */,
 				D2E26F212B7E4B5800CF1F4B /* UIView+Extension.swift in Sources */,
+				D2E26F262B7E650400CF1F4B /* TaskListViewController.swift in Sources */,
 				D21633622B7D0F5C002529D6 /* PriorityViewController.swift in Sources */,
 				D21633332B7C7F66002529D6 /* SceneDelegate.swift in Sources */,
 				D2E26F142B7DF60C00CF1F4B /* ConfigureProtocol.swift in Sources */,
