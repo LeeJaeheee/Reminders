@@ -49,9 +49,7 @@ extension HomeViewController: HomeViewDelegate {
                 self.mainView.collectionView.reloadData()
             }
         }
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
-        //transition(style: .presentNavigation, viewController: AddTaskViewController.self)
+        transition(style: .presentNavigation, viewController: vc)
     }
     
     func rightBarButtonTapped() {
@@ -84,7 +82,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = TaskListViewController()
         vc.collectionType = HomeCollection.allCases[indexPath.item]
-        navigationController?.pushViewController(vc, animated: true)
+        transition(style: .push, viewController: vc)
     }
     
 }

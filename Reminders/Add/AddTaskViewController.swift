@@ -107,14 +107,14 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
                 self.tag = !$0.isEmpty ? $0 : nil
                 tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = $0
             }
-            navigationController?.pushViewController(vc, animated: true)
+            transition(style: .push, viewController: vc)
         case .priority:
             let vc = PriorityViewController()
             vc.selectedIndex = {
                 self.priority = $0
                 tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = Priority(rawValue: $0)?.title
             }
-            navigationController?.pushViewController(vc, animated: true)
+            transition(style: .push, viewController: vc)
         case .image:
             break
         }

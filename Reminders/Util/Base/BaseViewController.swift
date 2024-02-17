@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum TransitionStyle {
+    case present
+    case presentNavigation
+    case presentFullNavigation
+    case push
+}
+
 class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -24,22 +31,26 @@ class BaseViewController: UIViewController {
     
     func configureView() { }
     
-    //TODO: 구조 다시 생각해보기
     func transition<U: UIViewController>(style: TransitionStyle, viewController: U.Type) {
         let vc = U()
         
+        transition(style: style, viewController: vc)
+    }
+    
+    func transition<U: UIViewController>(style: TransitionStyle, viewController: U) {
+
         switch style {
         case .present:
-            present(vc, animated: true)
+            present(viewController, animated: true)
         case .presentNavigation:
-            let nav = UINavigationController(rootViewController: vc)
+            let nav = UINavigationController(rootViewController: viewController)
             present(nav, animated: true)
         case .presentFullNavigation:
-            let nav = UINavigationController(rootViewController: vc)
+            let nav = UINavigationController(rootViewController: viewController)
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true)
         case .push:
-            navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(viewController, animated: true)
         }
     }
     

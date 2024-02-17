@@ -7,13 +7,6 @@
 
 import UIKit
 
-enum TransitionStyle {
-    case present
-    case presentNavigation
-    case presentFullNavigation
-    case push
-}
-
 class BaseCustomViewController<T: BaseView>: BaseViewController {
     
     var mainView: T = T()
