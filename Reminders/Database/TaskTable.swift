@@ -13,7 +13,7 @@ enum SortType {
     case deadline(ascending: Bool)
     case priority(ascending: Bool)
     
-    var sortParam: (String, Bool) {
+    var sortParam: (keyPath: String, ascending: Bool) {
         switch self {
         case .title(let ascending):
             ("title", ascending)

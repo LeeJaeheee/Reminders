@@ -15,6 +15,13 @@ class TaskListViewController: BaseViewController {
     
     var collectionType = HomeCollection.all
     lazy var list = repository.fetch(collectionType)
+    
+    var sortParam = SortType.deadline(ascending: true).sortParam {
+        didSet {
+            list = repository.fetch(collectionType, sortParam: sortParam)
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +51,24 @@ class TaskListViewController: BaseViewController {
     func setBarButton() {
         
         let items = UIMenu(title: "정렬 기준", options: [.singleSelection, .displayInline], children: [
-            UIAction(title: "마감일", state: .on, handler: { _ in }),
-            UIAction(title: "제목", handler: { _ in }),
-            UIAction(title: "우선순위", handler: { _ in })
+            UIAction(title: "마감일", state: .on, handler: { _ in
+                self.sortParam = SortType.deadline(ascending: self.sortParam.ascending).sortParam
+            }),
+            UIAction(title: "제목", handler: { _ in
+                self.sortParam = SortType.title(ascending: self.sortParam.ascending).sortParam
+            }),
+            UIAction(title: "우선순위", handler: { _ in
+                self.sortParam = SortType.priority(ascending: self.sortParam.ascending).sortParam
+            })
         ])
         
         let sortType = UIMenu(title: "정렬 순서", options: [.singleSelection, .displayInline], children: [
-            UIAction(title: "오름차순", state: .on, handler: { _ in }),
-            UIAction(title: "내림차순", handler: { _ in })
+            UIAction(title: "오름차순", state: .on, handler: { _ in
+                self.sortParam.ascending = true
+            }),
+            UIAction(title: "내림차순", handler: { _ in
+                self.sortParam.ascending = false
+            })
         ])
         
         let button = UIButton()

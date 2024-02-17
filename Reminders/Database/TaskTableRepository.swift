@@ -17,7 +17,6 @@ final class TaskTableRepository {
     }
     
     func createItem(_ item: TaskTable) {
-
         do {
             try realm.write {
                 realm.add(item)
@@ -25,10 +24,9 @@ final class TaskTableRepository {
         } catch {
             print(error)
         }
-
     }
     
-    func fetch(_ type: HomeCollection, sortParam: (String, Bool) = SortType.deadline(ascending: true).sortParam) -> Results<TaskTable> {
+    func fetch(_ type: HomeCollection, sortParam: (keyPath: String, ascending: Bool) = SortType.deadline(ascending: true).sortParam) -> Results<TaskTable> {
         
         let calendar = Calendar.current
         let startDate = calendar.startOfDay(for: Date())
@@ -36,25 +34,29 @@ final class TaskTableRepository {
         
         switch type {
         case .today:
-            return realm.objects(TaskTable.self).where {
-                $0.deadline >= startDate && $0.deadline < endDate
-            }.sorted(byKeyPath: sortParam.0, ascending: sortParam.1)
+            return realm.objects(TaskTable.self)
+                .where { $0.deadline >= startDate && $0.deadline < endDate }
+                .sorted(byKeyPath: sortParam.keyPath, ascending: sortParam.ascending)
         case .scheduled:
-            return realm.objects(TaskTable.self).where {
-                $0.deadline >= endDate
-            }.sorted(byKeyPath: sortParam.0, ascending: sortParam.1)
+            return realm.objects(TaskTable.self)
+                .where { $0.deadline >= endDate }
+                .sorted(byKeyPath: sortParam.keyPath, ascending: sortParam.ascending)
         case .all:
-            return realm.objects(TaskTable.self).sorted(byKeyPath: sortParam.0, ascending: sortParam.1)
+            return realm.objects(TaskTable.self)
+                .sorted(byKeyPath: sortParam.keyPath, ascending: sortParam.ascending)
         case .flagged:
-            return realm.objects(TaskTable.self).where { $0.isFlagged }.sorted(byKeyPath: sortParam.0, ascending: sortParam.1)
+            return realm.objects(TaskTable.self)
+                .where { $0.isFlagged }
+                .sorted(byKeyPath: sortParam.keyPath, ascending: sortParam.ascending)
         case .completed:
-            return realm.objects(TaskTable.self).where { $0.isDone }.sorted(byKeyPath: sortParam.0, ascending: !sortParam.1)
+            return realm.objects(TaskTable.self)
+                .where { $0.isDone }
+                .sorted(byKeyPath: sortParam.keyPath, ascending: !sortParam.ascending)
         }
     }
     
     //TODO: Update
     func updateIsDone(_ item: TaskTable) {
-        
         do {
             try realm.write {
                 item.isDone.toggle()
@@ -62,11 +64,9 @@ final class TaskTableRepository {
         } catch {
             print(error)
         }
-        
     }
     
     func delete(_ item: TaskTable) {
-        
         do {
             try realm.write {
                 realm.delete(item)
@@ -74,6 +74,5 @@ final class TaskTableRepository {
         } catch {
             print(error)
         }
-        
     }
 }
