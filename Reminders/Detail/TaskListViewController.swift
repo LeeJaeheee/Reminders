@@ -13,7 +13,8 @@ class TaskListViewController: BaseViewController {
     
     let repository = TaskTableRepository()
     
-    lazy var list = repository.fetch(.all)
+    var collectionType = HomeCollection.all
+    lazy var list = repository.fetch(collectionType)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class TaskListViewController: BaseViewController {
     
     override func configureView() {
         
-        navigationItem.title = "전체 할 일 목록"
+        navigationItem.title = collectionType.title
         setBarButton()
         
         tableView.delegate = self

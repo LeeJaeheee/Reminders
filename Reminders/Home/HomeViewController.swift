@@ -82,9 +82,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == HomeCollection.all.rawValue {
-            navigationController?.pushViewController(TaskListViewController(), animated: true)
-        }
+        let vc = TaskListViewController()
+        vc.collectionType = HomeCollection.allCases[indexPath.item]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
