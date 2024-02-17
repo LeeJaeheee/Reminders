@@ -15,6 +15,8 @@ protocol HomeViewDelegate {
 
 class HomeViewController: BaseCustomViewController<HomeView> {
 
+    let repository = TaskTableRepository()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +37,15 @@ class HomeViewController: BaseCustomViewController<HomeView> {
 extension HomeViewController: HomeViewDelegate {
     
     func leftBarButtonTapped() {
-        transition(style: .presentNavigation, viewController: AddTaskViewController.self)
+        let vc = AddTaskViewController()
+        vc.handler = {
+            if $0 {
+                self.mainView.collectionView.reloadData()
+            }
+        }
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+        //transition(style: .presentNavigation, viewController: AddTaskViewController.self)
     }
     
     func rightBarButtonTapped() {
@@ -60,12 +70,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.imageView.image = configImage.image
         cell.imageView.backgroundColor = configImage.backgroundColor
         
-        cell.countLabel.text = "\(homeCollection.database.count)"
-        
-        //FIXME: 테스트하고 지우기
-        if indexPath.row == 0 {
-            cell.countLabel.text = "\(homeCollection.today.count)"
-        }
+        cell.countLabel.text = "\(repository.fetch(homeCollection).count)"
         
         return cell
     }

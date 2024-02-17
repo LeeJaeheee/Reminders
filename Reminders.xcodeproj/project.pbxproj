@@ -34,6 +34,7 @@
 		D2E26F212B7E4B5800CF1F4B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */; };
 		D2E26F232B7E63F900CF1F4B /* HomeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */; };
 		D2E26F262B7E650400CF1F4B /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F252B7E650400CF1F4B /* TaskListViewController.swift */; };
+		D2E26F2A2B7FA11700CF1F4B /* TaskTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F292B7FA11700CF1F4B /* TaskTableRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollection.swift; sourceTree = "<group>"; };
 		D2E26F252B7E650400CF1F4B /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		D2E26F292B7FA11700CF1F4B /* TaskTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				D2E26F1B2B7E0CE200CF1F4B /* TaskTable.swift */,
+				D2E26F292B7FA11700CF1F4B /* TaskTableRepository.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				D21633542B7CE220002529D6 /* AddTaskViewController.swift in Sources */,
 				D2E26F122B7DF58B00CF1F4B /* MemoTableViewCell.swift in Sources */,
 				D21633592B7CEC61002529D6 /* ReusableProtocol.swift in Sources */,
+				D2E26F2A2B7FA11700CF1F4B /* TaskTableRepository.swift in Sources */,
 				D21633602B7D0F47002529D6 /* TagViewController.swift in Sources */,
 				D2E26F1E2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift in Sources */,
 				D21633642B7D1278002529D6 /* BaseViewController.swift in Sources */,

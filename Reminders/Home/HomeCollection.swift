@@ -10,8 +10,6 @@ import RealmSwift
 
 enum HomeCollection: Int, CaseIterable {
     
-    static let realm = try! Realm()
-    
     case today
     case scheduled
     case all
@@ -47,24 +45,5 @@ enum HomeCollection: Int, CaseIterable {
             (UIImage(systemName: "checkmark")!, .lightGray)
         }
     }
-    
-    //FIXME: 지우고 아래 database에서 쿼리로 다시하기
-    var today: LazyFilterSequence<Results<TaskTable>> {
-        HomeCollection.realm.objects(TaskTable.self).filter { Calendar.current.isDateInToday($0.deadline) }
-    }
-    
-    var database: Results<TaskTable> {
-        switch self {
-        case .today:
-            HomeCollection.realm.objects(TaskTable.self)
-        case .scheduled:
-            HomeCollection.realm.objects(TaskTable.self)
-        case .all:
-            HomeCollection.realm.objects(TaskTable.self)
-        case .flagged:
-            HomeCollection.realm.objects(TaskTable.self)
-        case .completed:
-            HomeCollection.realm.objects(TaskTable.self).where { $0.isDone }
-        }
-    }
+
 }

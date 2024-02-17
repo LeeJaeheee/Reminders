@@ -8,6 +8,23 @@
 import Foundation
 import RealmSwift
 
+enum SortType {
+    case title(ascending: Bool)
+    case deadline(ascending: Bool)
+    case priority(ascending: Bool)
+    
+    var sortParam: (String, Bool) {
+        switch self {
+        case .title(let ascending):
+            ("title", ascending)
+        case .deadline(let ascending):
+            ("deadline", ascending)
+        case .priority(let ascending):
+            ("priority", ascending)
+        }
+    }
+}
+
 class TaskTable: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
@@ -17,6 +34,7 @@ class TaskTable: Object {
     @Persisted var tag: String
     @Persisted var priority: Int
     @Persisted var isDone: Bool
+    @Persisted var isFlagged: Bool
     
     convenience init(title: String, memo: String? = nil, deadline: Date, tag: String, priority: Int) {
         self.init()
@@ -27,5 +45,6 @@ class TaskTable: Object {
         self.tag = tag
         self.priority = priority
         self.isDone = false
+        self.isFlagged = false
     }
 }

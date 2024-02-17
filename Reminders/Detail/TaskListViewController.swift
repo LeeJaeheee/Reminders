@@ -11,7 +11,9 @@ class TaskListViewController: BaseViewController {
     
     let tableView = UITableView()
     
-    let list = HomeCollection.all.database
+    let repository = TaskTableRepository()
+    
+    lazy var list = repository.fetch(.all)
 
     override func viewDidLoad() {
         super.viewDidLoad()
