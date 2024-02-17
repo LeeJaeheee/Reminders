@@ -37,7 +37,7 @@ class TaskListViewController: BaseViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-
+        tableView.allowsMultipleSelectionDuringEditing = true
     }
     
     func setBarButton() {
@@ -59,8 +59,25 @@ class TaskListViewController: BaseViewController {
         button.showsMenuAsPrimaryAction = true
         //button.changesSelectionAsPrimaryAction = true
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        let editButton = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
         
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: button), editButton]
+    }
+    
+    @objc func editButtonTapped(_ sender: UIBarButtonItem) {
+
+        if tableView.isEditing, let selectedRows = tableView.indexPathsForSelectedRows {
+            for indexPath in selectedRows {
+                repository.updateIsDone(list[indexPath.row])
+            }
+        }
+
+        tableView.isEditing.toggle()
+        
+        sender.title = tableView.isEditing ? "완료" : "편집"
+        navigationItem.rightBarButtonItems?[0].isHidden.toggle()
+        
+        tableView.reloadData()
     }
 
 }
@@ -78,6 +95,11 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.accessoryType = data.isDone ? .checkmark : .none
         cell.textLabel?.text = data.title
         cell.detailTextLabel?.text = data.memo
+        cell.selectionStyle = tableView.isEditing ? .default : .none
+        
+        if tableView.isEditing && data.isDone {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
         
         return cell
     }
@@ -93,6 +115,12 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
             completion(true)
         }
         return UISwipeActionsConfiguration(actions: [deleteAction, detailAction])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.isEditing {
+            print(indexPath)
+        }
     }
     
 }
