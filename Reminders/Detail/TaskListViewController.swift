@@ -68,7 +68,10 @@ class TaskListViewController: BaseViewController {
 
         if tableView.isEditing, let selectedRows = tableView.indexPathsForSelectedRows {
             for indexPath in selectedRows {
-                repository.updateIsDone(list[indexPath.row])
+                let item = list[indexPath.row]
+                if !item.isDone {
+                    repository.updateIsDone(item)
+                }
             }
         }
 
@@ -117,10 +120,12 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [deleteAction, detailAction])
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.isEditing {
-            print(indexPath)
+    func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+        let item = list[indexPath.row]
+        if item.isDone {
+            repository.updateIsDone(item)
         }
+        return indexPath
     }
     
 }
