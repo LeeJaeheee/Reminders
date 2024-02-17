@@ -37,6 +37,7 @@ class TaskListViewController: BaseViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+
     }
     
     func setBarButton() {
@@ -79,6 +80,19 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = data.memo
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let detailAction = UIContextualAction(style: .normal, title: "세부사항") { _, _, completion in
+            //TODO: 디테일 페이지 연결
+            completion(true)
+        }
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { _, _, completion in
+            self.repository.delete(self.list[indexPath.row])
+            tableView.reloadData()
+            completion(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction, detailAction])
     }
     
 }

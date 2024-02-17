@@ -22,6 +22,12 @@ class HomeViewController: BaseCustomViewController<HomeView> {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        mainView.collectionView.reloadData()
+    }
+    
     override func configureView() {
         
         navigationItem.title = "전체"

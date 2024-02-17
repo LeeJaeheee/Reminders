@@ -52,5 +52,17 @@ final class TaskTableRepository {
         }
     }
     
-    //TODO: Update, Delete
+    //TODO: Update
+    
+    func delete(_ item: TaskTable) {
+        
+        do {
+            try realm.write {
+                realm.delete(item)
+            }
+        } catch {
+            print(error)
+        }
+        
+    }
 }
