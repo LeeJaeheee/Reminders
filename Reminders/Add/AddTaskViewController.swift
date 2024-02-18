@@ -8,6 +8,7 @@
 import UIKit
 import Toast
 
+// TODO: 값전달
 class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     
     var handler: ((Bool) -> Void)?
@@ -31,10 +32,12 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+        
+        navigationController?.presentationController?.delegate = self
     }
     
     @objc func leftBarButtonTapped() {
-        dismiss(animated: true)
+        showAlertForDismiss()
     }
     
     @objc func rightBarButtonTapped() {
@@ -81,6 +84,12 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd"
             mainView.tableView.cellForRow(at: IndexPath(row: 0, section: AddTask.deadline.rawValue))?.detailTextLabel?.text = dateFormatter.string(from: value)
+        }
+    }
+    
+    func showAlertForDismiss() {
+        showAlert(style: .actionSheet, okTitle: "변경사항 폐기", okStyle: .destructive, showCancelButton: true) {
+            self.dismiss(animated: true)
         }
     }
 
@@ -143,4 +152,13 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
         view.endEditing(true)
     }
     
+}
+
+extension AddTaskViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        showAlertForDismiss()
+        return false
+    }
+ 
 }

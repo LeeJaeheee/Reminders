@@ -54,9 +54,9 @@ class BaseViewController: UIViewController {
         }
     }
     
-    func showAlert(title: String, message: String, okTitle: String = "확인", showCancelButton: Bool = false, handler: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: okTitle, style: .default) { _ in
+    func showAlert(title: String? = nil, message: String? = nil, style: UIAlertController.Style = .alert, okTitle: String = "확인", okStyle: UIAlertAction.Style = .default, showCancelButton: Bool = false, handler: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
+        let okAction = UIAlertAction(title: okTitle, style: okStyle) { _ in
             handler?()
         }
         alert.addAction(okAction)
