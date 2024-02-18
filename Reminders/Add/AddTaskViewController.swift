@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     
@@ -37,22 +38,40 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     }
     
     @objc func rightBarButtonTapped() {
-        // DB에 저장
+ 
+        view.endEditing(true)
+        
         let cell = mainView.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MemoTableViewCell
         
-        if let title = cell.titleTextField.text, !title.isEmpty, let deadline, let priority, let tag {
-            
-            let memo = !cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
-            let data = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
-            
-            repository.createItem(data)
-            print(repository.getFileURL())
-
-            handler?(true)
-            dismiss(animated: true)
-        } else {
-            showAlert(title: "ㅇㅇ", message: "ㅇㅇㅇㅇ")
+        guard let title = cell.titleTextField.text, !title.isEmpty else {
+            view.makeToast("제목을 입력해주세요")
+            return
         }
+        
+        guard let deadline = deadline else {
+            view.makeToast("마감일을 입력해주세요")
+            return
+        }
+        
+        guard let tag = tag else {
+            view.makeToast("태그를 입력해주세요")
+            return
+        }
+        
+        guard let priority = priority else {
+            view.makeToast("우선순위를 선택해주세요")
+            return
+        }
+        
+        let memo = !cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
+        let data = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
+        
+        repository.createItem(data)
+        print(repository.getFileURL())
+        
+        handler?(true)
+        dismiss(animated: true)
+
     }
     
     @objc func deadlineReceivedNotification(notification: NSNotification) {
@@ -118,6 +137,10 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
         case .image:
             break
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
     
 }

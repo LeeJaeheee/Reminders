@@ -17,7 +17,7 @@ enum AddTask: Int, CaseIterable {
     var title: String {
         switch self {
         case .memo:
-            ""
+            "제목"
         case .deadline:
             "마감일"
         case .tag:
