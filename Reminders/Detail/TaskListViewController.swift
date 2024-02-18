@@ -45,7 +45,10 @@ class TaskListViewController: BaseViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.allowsMultipleSelectionDuringEditing = true
+        tableView.register(TaskListTableViewCell.self, forCellReuseIdentifier: TaskListTableViewCell.identifier)
     }
     
     func setBarButton() {
@@ -110,12 +113,12 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ListCell")
+//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ListCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: TaskListTableViewCell.identifier, for: indexPath) as! TaskListTableViewCell
         
         let data = list[indexPath.row]
-        cell.accessoryType = data.isDone ? .checkmark : .none
-        cell.textLabel?.text = data.title
-        cell.detailTextLabel?.text = data.memo
+        cell.configureCell(data)
+        
         cell.selectionStyle = tableView.isEditing ? .default : .none
         
         if tableView.isEditing && data.isDone {
