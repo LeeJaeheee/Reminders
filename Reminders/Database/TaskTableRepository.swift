@@ -56,6 +56,20 @@ final class TaskTableRepository {
     }
     
     //TODO: Update
+    func update(_ oldItem: TaskTable, newItem: TaskTable) {
+        do {
+            try realm.write {
+                oldItem.title = newItem.title
+                oldItem.memo = newItem.memo
+                oldItem.deadline = newItem.deadline
+                oldItem.tag = newItem.tag
+                oldItem.priority = newItem.priority
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     func updateIsDone(_ item: TaskTable) {
         do {
             try realm.write {

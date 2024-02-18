@@ -113,7 +113,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ListCell")
+
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskListTableViewCell.identifier, for: indexPath) as! TaskListTableViewCell
         
         let data = list[indexPath.row]
@@ -130,7 +130,12 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let detailAction = UIContextualAction(style: .normal, title: "세부사항") { _, _, completion in
-            //TODO: 디테일 페이지 연결
+            let vc = AddTaskViewController()
+            vc.data = self.list[indexPath.row]
+            vc.handler = {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            self.transition(style: .presentNavigation, viewController: vc)
             completion(true)
         }
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { _, _, completion in

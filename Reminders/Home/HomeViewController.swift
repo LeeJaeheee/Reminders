@@ -45,9 +45,7 @@ extension HomeViewController: HomeViewDelegate {
     func leftBarButtonTapped() {
         let vc = AddTaskViewController()
         vc.handler = {
-            if $0 {
-                self.mainView.collectionView.reloadData()
-            }
+            self.mainView.collectionView.reloadData()
         }
         transition(style: .presentNavigation, viewController: vc)
     }

@@ -8,10 +8,12 @@
 import UIKit
 import Toast
 
-// TODO: 값전달
+// TODO: 값전달, Flag 속성..
 class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     
-    var handler: ((Bool) -> Void)?
+    var handler: (() -> Void)?
+    
+    var data: TaskTable?
     
     var deadline: Date?
     var tag: String?
@@ -26,9 +28,9 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     }
     
     override func configureView() {
-        navigationItem.title = "새로운 할 일"
+        navigationItem.title = data == nil ? "새로운 할 일" : "세부 사항"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: data == nil ? "추가" : "완료", style: .plain, target: self, action: #selector(rightBarButtonTapped))
         
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
@@ -67,12 +69,16 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         }
         
         let memo = !cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
-        let data = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
+        let newData = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
         
-        repository.createItem(data)
+        if let data {
+            repository.update(data, newItem: newData)
+        } else {
+            repository.createItem(newData)
+        }
         print(repository.getFileURL())
         
-        handler?(true)
+        handler?()
         dismiss(animated: true)
 
     }
@@ -81,6 +87,7 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         if let value = notification.userInfo?[AddTask.deadline] as? Date {
             deadline = value
             
+            // TODO: dateFormatter extension으로 처리하기
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd"
             mainView.tableView.cellForRow(at: IndexPath(row: 0, section: AddTask.deadline.rawValue))?.detailTextLabel?.text = dateFormatter.string(from: value)
@@ -113,11 +120,32 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: MemoTableViewCell.identifier, for: indexPath) as! MemoTableViewCell
             cell.selectionStyle = .none
+            cell.titleTextField.text = data?.title
+            cell.memoTextView.text = data?.memo
             return cell
         } else {
             let cell = UITableViewCell(style: .value1, reuseIdentifier: "value1Cell")
             cell.textLabel?.text = AddTask(rawValue: indexPath.section)?.title
             cell.accessoryType = .disclosureIndicator
+            
+            if let data = data {
+                switch AddTask.allCases[indexPath.section] {
+                case .deadline:
+                    deadline = data.deadline
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MM/dd"
+                    cell.detailTextLabel?.text = dateFormatter.string(from: data.deadline)
+                case .tag:
+                    tag = data.tag
+                    cell.detailTextLabel?.text = data.tag
+                case .priority:
+                    priority = data.priority
+                    cell.detailTextLabel?.text = Priority(rawValue: data.priority)?.title
+                default:
+                    break
+                }
+            }
+            
             return cell
         }
     }
