@@ -55,6 +55,15 @@ final class TaskTableRepository {
         }
     }
     
+    func fetchSpecificDate(_ date: Date) -> Results<TaskTable> {
+        let calendar = Calendar.current
+        let startDate = calendar.startOfDay(for: date)
+        let endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+        
+        return realm.objects(TaskTable.self)
+            .where { $0.deadline >= startDate && $0.deadline < endDate }
+    }
+    
     //TODO: Update
     func update(_ oldItem: TaskTable, newItem: TaskTable) {
         do {

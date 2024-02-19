@@ -31,11 +31,17 @@ class HomeViewController: BaseCustomViewController<HomeView> {
     override func configureView() {
         
         navigationItem.title = "전체"
+        let calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .plain, target: self, action: #selector(calendarButtonTapped))
+        navigationItem.rightBarButtonItem = calendarButton
         
         mainView.delegate = self
         
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
+    }
+    
+    @objc func calendarButtonTapped() {
+        transition(style: .push, viewController: CalendarViewController.self)
     }
 
 }
