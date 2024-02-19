@@ -18,6 +18,7 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     var deadline: Date?
     var tag: String?
     var priority: Int?
+    var image: UIImage?
     
     let repository = TaskTableRepository()
 
@@ -48,25 +49,10 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         
         let cell = mainView.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! MemoTableViewCell
         
-        guard let title = cell.titleTextField.text, !title.isEmpty else {
-            view.makeToast("제목을 입력해주세요")
-            return
-        }
-        
-        guard let deadline = deadline else {
-            view.makeToast("마감일을 입력해주세요")
-            return
-        }
-        
-        guard let tag = tag else {
-            view.makeToast("태그를 입력해주세요")
-            return
-        }
-        
-        guard let priority = priority else {
-            view.makeToast("우선순위를 선택해주세요")
-            return
-        }
+        guard let title = cell.titleTextField.text, !title.isEmpty else { view.makeToast("제목을 입력해주세요"); return }
+        guard let deadline = deadline else { view.makeToast("마감일을 입력해주세요"); return }
+        guard let tag = tag else { view.makeToast("태그를 입력해주세요"); return }
+        guard let priority = priority else { view.makeToast("우선순위를 선택해주세요"); return }
         
         let memo = !cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
         let newData = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
@@ -76,6 +62,11 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         } else {
             repository.createItem(newData)
         }
+        
+        if let image {
+            saveImageToDocument(image, filename: "\(data?.id ?? newData.id)")
+        }
+        
         print(repository.getFileURL())
         
         handler?()
@@ -130,6 +121,8 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let data = data {
                 switch AddTask.allCases[indexPath.section] {
+                case .memo:
+                    break
                 case .deadline:
                     deadline = data.deadline
                     let dateFormatter = DateFormatter()
@@ -141,8 +134,12 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
                 case .priority:
                     priority = data.priority
                     cell.detailTextLabel?.text = Priority(rawValue: data.priority)?.title
-                default:
-                    break
+                case .image:
+                    if let image = loadImageFromDocument(filename: "\(data.id)") {
+                        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
+                        imageView.image = image
+                        cell.accessoryView = imageView
+                    }
                 }
             }
             
@@ -172,7 +169,10 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
             }
             transition(style: .push, viewController: vc)
         case .image:
-            break
+            let vc = UIImagePickerController()
+            vc.delegate = self
+            vc.allowsEditing = true
+            present(vc, animated: true)
         }
     }
     
@@ -189,4 +189,18 @@ extension AddTaskViewController: UIAdaptivePresentationControllerDelegate {
         return false
     }
  
+}
+
+extension AddTaskViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            image = pickedImage
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
+            imageView.image = image
+            mainView.tableView.cellForRow(at: IndexPath(row: 0, section: AddTask.image.rawValue))?.accessoryView = imageView
+        }
+        dismiss(animated: true)
+    }
+    
 }

@@ -117,6 +117,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskListTableViewCell.identifier, for: indexPath) as! TaskListTableViewCell
         
         let data = list[indexPath.row]
+        cell.customImageView.image = loadImageFromDocument(filename: "\(data.id)")
         cell.configureCell(data)
         
         cell.selectionStyle = tableView.isEditing ? .default : .none
