@@ -11,6 +11,8 @@ import SnapKit
 class DeadlineViewController: BaseViewController {
     
     let datePicker = UIDatePicker()
+    
+    var deadline: Date?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,7 @@ class DeadlineViewController: BaseViewController {
     override func configureView() {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
+        datePicker.setDate(deadline ?? Date(), animated: false)
     }
 
 }

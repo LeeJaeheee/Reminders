@@ -29,6 +29,7 @@ class PriorityViewController: BaseViewController {
     
     let segmentedControl = UISegmentedControl()
     
+    var priority: Int?
     var selectedIndex: ((Int) -> Void)?
 
     override func viewDidLoad() {
@@ -57,7 +58,7 @@ class PriorityViewController: BaseViewController {
         for item in Priority.allCases {
             segmentedControl.insertSegment(withTitle: item.title, at: item.rawValue, animated: true)
         }
-        segmentedControl.selectedSegmentIndex = 1
+        segmentedControl.selectedSegmentIndex = priority ?? 1
     }
 
 }

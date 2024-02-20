@@ -153,9 +153,12 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
         case .memo:
             break
         case .deadline:
-            transition(style: .push, viewController: DeadlineViewController.self)
+            let vc = DeadlineViewController()
+            vc.deadline = deadline
+            transition(style: .push, viewController: vc)
         case .tag:
             let vc = TagViewController()
+            vc.tag = tag
             vc.tagText = {
                 self.tag = !$0.isEmpty ? $0 : nil
                 tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = $0
@@ -163,6 +166,7 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
             transition(style: .push, viewController: vc)
         case .priority:
             let vc = PriorityViewController()
+            vc.priority = priority
             vc.selectedIndex = {
                 self.priority = $0
                 tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = Priority(rawValue: $0)?.title

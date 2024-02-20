@@ -13,6 +13,7 @@ class TagViewController: BaseViewController {
     let textField = UITextField()
     
     var tagText: ((String) -> Void)?
+    var tag: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,7 @@ class TagViewController: BaseViewController {
         textField.backgroundColor = .systemBackground
         textField.font = .systemFont(ofSize: 15)
         textField.placeholder = "태그를 입력해주세요."
+        textField.text = tag
     }
 
 }
