@@ -65,5 +65,11 @@ class BaseViewController: UIViewController {
         }
         present(alert, animated: true)
     }
+    
+    func showAlertForDismiss() {
+        showAlert(style: .actionSheet, okTitle: "변경사항 폐기", okStyle: .destructive, showCancelButton: true) {
+            self.dismiss(animated: true)
+        }
+    }
 
 }

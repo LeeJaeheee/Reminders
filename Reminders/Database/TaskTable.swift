@@ -25,6 +25,19 @@ enum SortType {
     }
 }
 
+class Folder: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var title: String
+    @Persisted var regDate: Date
+    @Persisted var task: List<TaskTable>
+    
+    convenience init(title: String) {
+        self.init()
+        self.title = title
+        self.regDate = Date()
+    }
+}
+
 class TaskTable: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
@@ -35,6 +48,7 @@ class TaskTable: Object {
     @Persisted var priority: Int
     @Persisted var isDone: Bool
     @Persisted var isFlagged: Bool
+    @Persisted(originProperty: "task") var parent: LinkingObjects<Folder>
     
     convenience init(title: String, memo: String? = nil, deadline: Date, tag: String, priority: Int) {
         self.init()

@@ -8,7 +8,7 @@
 import UIKit
 import Toast
 
-// TODO: 값전달, Flag 속성..
+// TODO: Flag 속성..
 class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     
     var handler: (() -> Void)?
@@ -60,7 +60,8 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         if let data {
             repository.update(data, newItem: newData)
         } else {
-            repository.createItem(newData)
+            //FIXME: 수정해줘ㅓㅓ
+            //repository.appendTask(newData)
         }
         
         if let image {
@@ -85,12 +86,6 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         }
     }
     
-    func showAlertForDismiss() {
-        showAlert(style: .actionSheet, okTitle: "변경사항 폐기", okStyle: .destructive, showCancelButton: true) {
-            self.dismiss(animated: true)
-        }
-    }
-
 }
 
 extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {

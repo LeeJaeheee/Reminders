@@ -20,6 +20,7 @@ class HomeViewController: BaseCustomViewController<HomeView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(repository.getFileURL())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +58,10 @@ extension HomeViewController: HomeViewDelegate {
     }
     
     func rightBarButtonTapped() {
-        
+        let vc = AddFolderViewController()
+        //TODO: 핸들러 구현해줘
+        vc.handler = { }
+        transition(style: .presentNavigation, viewController: vc)
     }
     
 }

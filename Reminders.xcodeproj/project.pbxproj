@@ -42,6 +42,8 @@
 		D2E26F392B8389ED00CF1F4B /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D2E26F382B8389ED00CF1F4B /* FSCalendar */; };
 		D2E26F3C2B838A2A00CF1F4B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F3B2B838A2A00CF1F4B /* CalendarViewController.swift */; };
 		D2E26F3E2B838A3B00CF1F4B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F3D2B838A3B00CF1F4B /* CalendarView.swift */; };
+		D2E26F402B8483C600CF1F4B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */; };
+		D2E26F422B8483E700CF1F4B /* AddFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F412B8483E700CF1F4B /* AddFolderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		D2E26F352B836E9A00CF1F4B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		D2E26F3B2B838A2A00CF1F4B /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		D2E26F3D2B838A3B00CF1F4B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
+		D2E26F412B8483E700CF1F4B /* AddFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,8 @@
 				D216335F2B7D0F47002529D6 /* TagViewController.swift */,
 				D21633612B7D0F5C002529D6 /* PriorityViewController.swift */,
 				D2E26F112B7DF58B00CF1F4B /* MemoTableViewCell.swift */,
+				D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */,
+				D2E26F412B8483E700CF1F4B /* AddFolderView.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -307,6 +313,7 @@
 			files = (
 				D2E26F232B7E63F900CF1F4B /* HomeCollection.swift in Sources */,
 				D216334B2B7C803F002529D6 /* BaseCustomViewController.swift in Sources */,
+				D2E26F402B8483C600CF1F4B /* AddFolderViewController.swift in Sources */,
 				D21633542B7CE220002529D6 /* AddTaskViewController.swift in Sources */,
 				D2E26F122B7DF58B00CF1F4B /* MemoTableViewCell.swift in Sources */,
 				D21633592B7CEC61002529D6 /* ReusableProtocol.swift in Sources */,
@@ -325,6 +332,7 @@
 				D2E26F212B7E4B5800CF1F4B /* UIView+Extension.swift in Sources */,
 				D2E26F262B7E650400CF1F4B /* TaskListViewController.swift in Sources */,
 				D2E26F312B825E8D00CF1F4B /* BaseTableViewCell.swift in Sources */,
+				D2E26F422B8483E700CF1F4B /* AddFolderView.swift in Sources */,
 				D21633622B7D0F5C002529D6 /* PriorityViewController.swift in Sources */,
 				D21633332B7C7F66002529D6 /* SceneDelegate.swift in Sources */,
 				D2E26F142B7DF60C00CF1F4B /* ConfigureProtocol.swift in Sources */,

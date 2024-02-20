@@ -46,7 +46,10 @@ class HomeView: BaseView {
         
         let leftBarButton = UIBarButtonItem(customView: button)
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let rightBarButton = UIBarButtonItem(title: "목록 추가")
+        let rightBarButton = UIBarButtonItem(title: "목록 추가", primaryAction: UIAction(handler: { _ in
+            self.rightBarButtonTapped()
+        }))
+ 
         toolbar.items = [leftBarButton, spacer, rightBarButton]
         
         collectionView.backgroundColor = .clear
@@ -68,5 +71,9 @@ class HomeView: BaseView {
     
     @objc func leftBarButtonTapped() {
         delegate?.leftBarButtonTapped()
+    }
+    
+    @objc func rightBarButtonTapped() {
+        delegate?.rightBarButtonTapped()
     }
 }

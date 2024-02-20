@@ -16,10 +16,20 @@ final class TaskTableRepository {
         realm.configuration.fileURL
     }
     
-    func createItem(_ item: TaskTable) {
+    func createFolder(_ item: Folder) {
         do {
             try realm.write {
                 realm.add(item)
+            }
+        } catch {
+            
+        }
+    }
+    
+    func appendTask(folder: Folder, item: TaskTable) {
+        do {
+            try realm.write {
+                folder.task.append(item)
             }
         } catch {
             print(error)
