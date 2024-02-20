@@ -19,6 +19,10 @@ class AddFolderViewController: BaseCustomViewController<AddFolderView> {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: data == nil ? "추가" : "완료", style: .plain, target: self, action: #selector(rightBarButtonTapped))
         navigationController?.presentationController?.delegate = self
+        
+        if let data {
+            mainView.titleTextField.text = data.title
+        }
     }
     
     @objc func leftBarButtonTapped() {
@@ -31,8 +35,14 @@ class AddFolderViewController: BaseCustomViewController<AddFolderView> {
         
         guard let title = mainView.titleTextField.text, !title.isEmpty else { view.makeToast("제목을 입력해주세요"); return }
         
-        let folder = Folder(title: title)
-        repository.createFolder(folder)
+        if let data {
+            if data.title != title {
+                repository.updateFolderTitle(data, title: title)
+            }
+        } else {
+            let folder = Folder(title: title)
+            repository.createFolder(folder)
+        }
         
         handler?()
         dismiss(animated: true)

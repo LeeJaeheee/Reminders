@@ -108,9 +108,30 @@ final class TaskTableRepository {
         }
     }
     
+    func updateFolderTitle(_ item: Folder, title: String) {
+        do {
+            try realm.write {
+                item.title = title
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     func delete(_ item: TaskTable) {
         do {
             try realm.write {
+                realm.delete(item)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func delete(_ item: Folder) {
+        do {
+            try realm.write {
+                realm.delete(item.task)
                 realm.delete(item)
             }
         } catch {

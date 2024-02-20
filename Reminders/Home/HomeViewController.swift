@@ -104,6 +104,30 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         transition(style: .push, viewController: vc)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let detailAction = UIContextualAction(style: .normal, title: "세부사항") { _, _, completion in
+            let vc = AddFolderViewController()
+            vc.data = self.folderList[indexPath.row]
+            vc.handler = {
+                //tableView.reloadRows(at: [indexPath], with: .automatic)
+                tableView.reloadData()
+            }
+            self.transition(style: .presentNavigation, viewController: vc)
+            completion(true)
+        }
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { _, _, completion in
+            for task in self.folderList[indexPath.row].task {
+                self.removeImageFromDocument(filename: "\(task.id)")
+            }
+            self.repository.delete(self.folderList[indexPath.row])
+            
+            self.mainView.collectionView.reloadData()
+            tableView.reloadData()
+            completion(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction, detailAction])
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
