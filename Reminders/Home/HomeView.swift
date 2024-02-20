@@ -13,8 +13,33 @@ class HomeView: BaseView {
     // iPhone 15 Pro Max : width는 53, height 16 이상이어야 경고가 안뜸 왜지..?
     let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: 53, height: 16))
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    
+    var collectionViewHeight: CGFloat?
     
     var delegate: HomeViewDelegate?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if collectionViewHeight == nil {
+            collectionView.layoutIfNeeded()
+            collectionViewHeight = collectionView.contentSize.height
+            
+            guard let collectionViewHeight else { return }
+            
+            if collectionViewHeight <= safeAreaLayoutGuide.layoutFrame.height {
+                collectionView.snp.updateConstraints { make in
+                    make.height.equalTo(collectionViewHeight)
+                }
+            } else {
+                collectionView.snp.remakeConstraints { make in
+                    make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+                    make.bottom.equalTo(toolbar.snp.top)
+                }
+            }
+        }
+    }
     
     override func configureHierarchy() {
         addSubview(collectionView)
@@ -29,7 +54,7 @@ class HomeView: BaseView {
         
         collectionView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
-            make.bottom.equalTo(toolbar.snp.top)
+            make.height.equalTo(0)
         }
         
     }
@@ -52,7 +77,7 @@ class HomeView: BaseView {
  
         toolbar.items = [leftBarButton, spacer, rightBarButton]
         
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .red
         collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.identifier)
     }
     
