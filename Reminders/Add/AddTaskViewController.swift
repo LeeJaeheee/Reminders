@@ -60,9 +60,7 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         let newData = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
         
         if let data {
-            print(data.parent)
-            // FIXME: 폴더도 업데이트 필요
-            repository.update(data, newItem: newData)
+            repository.update(data, newItem: newData, folder: folder)
         } else {
             repository.appendTask(folder: folder, item: newData)
         }

@@ -79,9 +79,14 @@ final class TaskTableRepository {
     }
     
     //TODO: Update
-    func update(_ oldItem: TaskTable, newItem: TaskTable) {
+    func update(_ oldItem: TaskTable, newItem: TaskTable, folder: Folder) {
         do {
             try realm.write {
+                if let oldFolder = oldItem.parent.first, oldFolder != folder, let index = oldFolder.task.index(of: oldItem) {
+                    oldFolder.task.remove(at: index)
+                    folder.task.append(oldItem)
+                }
+                
                 oldItem.title = newItem.title
                 oldItem.memo = newItem.memo
                 oldItem.deadline = newItem.deadline

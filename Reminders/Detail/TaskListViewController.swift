@@ -14,6 +14,7 @@ class TaskListViewController: BaseViewController {
     let repository = TaskTableRepository()
     
     var collectionType = HomeCollection.all
+    lazy var navTitle = collectionType.title
     lazy var list = repository.fetch(collectionType)
     
     var sortParam = SortType.deadline(ascending: true).sortParam {
@@ -40,7 +41,7 @@ class TaskListViewController: BaseViewController {
     
     override func configureView() {
         
-        navigationItem.title = collectionType.title
+        navigationItem.title = navTitle
         setBarButton()
         
         tableView.delegate = self
@@ -134,7 +135,8 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = AddTaskViewController()
             vc.data = self.list[indexPath.row]
             vc.handler = {
-                tableView.reloadRows(at: [indexPath], with: .automatic)
+                //tableView.reloadRows(at: [indexPath], with: .automatic)
+                tableView.reloadData()
             }
             self.transition(style: .presentNavigation, viewController: vc)
             completion(true)

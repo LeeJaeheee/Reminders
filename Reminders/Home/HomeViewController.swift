@@ -13,6 +13,7 @@ protocol HomeViewDelegate {
     func rightBarButtonTapped()
 }
 
+// TODO: HomeVC -> TaskListVC -> AddTaskVC 전체/목록/캘린더 여부 열거형으로 구분해서 대응하기
 class HomeViewController: BaseCustomViewController<HomeView> {
 
     let repository = TaskTableRepository()
@@ -29,6 +30,7 @@ class HomeViewController: BaseCustomViewController<HomeView> {
         
         // TODO: 변경사항 있는 경우에만 reload하기
         mainView.collectionView.reloadData()
+        mainView.tableView.reloadData()
     }
     
     override func configureView() {
@@ -98,6 +100,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TaskListViewController()
         vc.list = folderList[indexPath.row].task.sorted(byKeyPath: "regDate", ascending: true)
+        vc.navTitle = folderList[indexPath.row].title
         transition(style: .push, viewController: vc)
     }
     
