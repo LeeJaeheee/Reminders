@@ -140,6 +140,7 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
             completion(true)
         }
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { _, _, completion in
+            self.removeImageFromDocument(filename: "\(self.list[indexPath.row].id)")
             self.repository.delete(self.list[indexPath.row])
             tableView.reloadData()
             completion(true)
