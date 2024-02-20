@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 
+// TODO: keyPath 공부해서 써보기
 enum SortType {
     case title(ascending: Bool)
     case deadline(ascending: Bool)

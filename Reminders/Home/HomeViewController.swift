@@ -39,6 +39,8 @@ class HomeViewController: BaseCustomViewController<HomeView> {
         let calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .plain, target: self, action: #selector(calendarButtonTapped))
         navigationItem.rightBarButtonItem = calendarButton
         
+        mainView.toolbar.items?.first?.isEnabled = folderList.isEmpty ? false : true
+        
         mainView.delegate = self
         
         mainView.tableView.delegate = self
@@ -68,6 +70,7 @@ extension HomeViewController: HomeViewDelegate {
     func rightBarButtonTapped() {
         let vc = AddFolderViewController()
         vc.handler = {
+            self.mainView.toolbar.items?.first?.isEnabled = self.folderList.isEmpty ? false : true
             self.mainView.tableView.reloadData()
         }
         transition(style: .presentNavigation, viewController: vc)
@@ -78,7 +81,7 @@ extension HomeViewController: HomeViewDelegate {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "나의 목록"
+        return folderList.isEmpty ? nil : "나의 목록"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,6 +124,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             }
             self.repository.delete(self.folderList[indexPath.row])
             
+            self.mainView.toolbar.items?.first?.isEnabled = self.folderList.isEmpty ? false : true
             self.mainView.collectionView.reloadData()
             tableView.reloadData()
             completion(true)
