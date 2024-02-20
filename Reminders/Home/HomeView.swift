@@ -43,6 +43,7 @@ class HomeView: BaseView {
     
     override func configureHierarchy() {
         addSubview(collectionView)
+        addSubview(tableView)
         addSubview(toolbar)
     }
     
@@ -55,6 +56,12 @@ class HomeView: BaseView {
         collectionView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(0)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(toolbar.snp.top)
         }
         
     }
@@ -77,7 +84,7 @@ class HomeView: BaseView {
  
         toolbar.items = [leftBarButton, spacer, rightBarButton]
         
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.identifier)
     }
     

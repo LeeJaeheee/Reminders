@@ -16,6 +16,7 @@ protocol HomeViewDelegate {
 class HomeViewController: BaseCustomViewController<HomeView> {
 
     let repository = TaskTableRepository()
+    lazy var folderList = repository.fetchFolder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class HomeViewController: BaseCustomViewController<HomeView> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // TODO: 변경사항 있는 경우에만 reload하기
         mainView.collectionView.reloadData()
     }
     
@@ -36,6 +38,9 @@ class HomeViewController: BaseCustomViewController<HomeView> {
         navigationItem.rightBarButtonItem = calendarButton
         
         mainView.delegate = self
+        
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
         
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
@@ -53,15 +58,47 @@ extension HomeViewController: HomeViewDelegate {
         let vc = AddTaskViewController()
         vc.handler = {
             self.mainView.collectionView.reloadData()
+            self.mainView.tableView.reloadData()
         }
         transition(style: .presentNavigation, viewController: vc)
     }
     
     func rightBarButtonTapped() {
         let vc = AddFolderViewController()
-        //TODO: 핸들러 구현해줘
-        vc.handler = { }
+        vc.handler = {
+            self.mainView.tableView.reloadData()
+        }
         transition(style: .presentNavigation, viewController: vc)
+    }
+    
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "나의 목록"
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return folderList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "value1Cell")
+        
+        let data = folderList[indexPath.row]
+        cell.textLabel?.text = data.title
+        cell.detailTextLabel?.text = "\(data.task.count)"
+        cell.accessoryType = .disclosureIndicator
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = TaskListViewController()
+        vc.list = folderList[indexPath.row].task.sorted(byKeyPath: "regDate", ascending: true)
+        transition(style: .push, viewController: vc)
     }
     
 }
