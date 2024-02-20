@@ -44,6 +44,7 @@
 		D2E26F3E2B838A3B00CF1F4B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F3D2B838A3B00CF1F4B /* CalendarView.swift */; };
 		D2E26F402B8483C600CF1F4B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */; };
 		D2E26F422B8483E700CF1F4B /* AddFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F412B8483E700CF1F4B /* AddFolderView.swift */; };
+		D2E26F442B8499DA00CF1F4B /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F432B8499DA00CF1F4B /* FolderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		D2E26F3D2B838A3B00CF1F4B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		D2E26F412B8483E700CF1F4B /* AddFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderView.swift; sourceTree = "<group>"; };
+		D2E26F432B8499DA00CF1F4B /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				D2E26F112B7DF58B00CF1F4B /* MemoTableViewCell.swift */,
 				D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */,
 				D2E26F412B8483E700CF1F4B /* AddFolderView.swift */,
+				D2E26F432B8499DA00CF1F4B /* FolderViewController.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				D21633332B7C7F66002529D6 /* SceneDelegate.swift in Sources */,
 				D2E26F142B7DF60C00CF1F4B /* ConfigureProtocol.swift in Sources */,
 				D21633492B7C8035002529D6 /* BaseView.swift in Sources */,
+				D2E26F442B8499DA00CF1F4B /* FolderViewController.swift in Sources */,
 				D2E26F1C2B7E0CE200CF1F4B /* TaskTable.swift in Sources */,
 				D216334D2B7C808E002529D6 /* HomeViewController.swift in Sources */,
 				D2E26F2F2B825BA900CF1F4B /* TaskListTableViewCell.swift in Sources */,

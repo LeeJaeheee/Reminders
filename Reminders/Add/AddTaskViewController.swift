@@ -19,6 +19,7 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
     var tag: String?
     var priority: Int?
     var image: UIImage?
+    var folder: Folder?
     
     let repository = TaskTableRepository()
 
@@ -53,22 +54,22 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         guard let deadline = deadline else { view.makeToast("마감일을 입력해주세요"); return }
         guard let tag = tag else { view.makeToast("태그를 입력해주세요"); return }
         guard let priority = priority else { view.makeToast("우선순위를 선택해주세요"); return }
+        guard let folder = folder else { view.makeToast("목록을 선택해주세요"); return }
         
         let memo = !cell.memoTextView.text.isEmpty ? cell.memoTextView.text : nil
         let newData = TaskTable(title: title, memo: memo, deadline: deadline, tag: tag, priority: priority)
         
         if let data {
+            print(data.parent)
+            // FIXME: 폴더도 업데이트 필요
             repository.update(data, newItem: newData)
         } else {
-            //FIXME: 수정해줘ㅓㅓ
-            //repository.appendTask(newData)
+            repository.appendTask(folder: folder, item: newData)
         }
         
         if let image {
             saveImageToDocument(image, filename: "\(data?.id ?? newData.id)")
         }
-        
-        print(repository.getFileURL())
         
         handler?()
         dismiss(animated: true)
@@ -135,6 +136,9 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
                         imageView.image = image
                         cell.accessoryView = imageView
                     }
+                case .folder:
+                    folder = data.parent.first
+                    cell.detailTextLabel?.text = folder?.title
                 }
             }
             
@@ -172,6 +176,15 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
             vc.delegate = self
             vc.allowsEditing = true
             present(vc, animated: true)
+        case .folder:
+            let vc = FolderViewController()
+            vc.folder = folder
+            vc.handler = {
+                self.folder = $0
+                tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = $0.title
+            }
+            transition(style: .push, viewController: vc)
+            break
         }
     }
     

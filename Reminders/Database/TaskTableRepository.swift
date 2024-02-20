@@ -65,6 +65,10 @@ final class TaskTableRepository {
         }
     }
     
+    func fetchFolder() -> Results<Folder> {
+        return realm.objects(Folder.self)
+    }
+    
     func fetchSpecificDate(_ date: Date) -> Results<TaskTable> {
         let calendar = Calendar.current
         let startDate = calendar.startOfDay(for: date)
@@ -99,7 +103,6 @@ final class TaskTableRepository {
         }
     }
     
-    // TODO: 도큐먼트의 이미지도 삭제해야됨
     func delete(_ item: TaskTable) {
         do {
             try realm.write {

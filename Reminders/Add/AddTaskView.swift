@@ -13,6 +13,7 @@ enum AddTask: Int, CaseIterable {
     case tag
     case priority
     case image
+    case folder
     
     var title: String {
         switch self {
@@ -26,6 +27,8 @@ enum AddTask: Int, CaseIterable {
             "우선 순위"
         case .image:
             "이미지 추가"
+        case .folder:
+            "목록"
         }
     }
     
@@ -40,6 +43,8 @@ enum AddTask: Int, CaseIterable {
         case .priority:
             "PriorityReceived"
         case .image:
+            ""
+        case .folder:
             ""
         }
     }
