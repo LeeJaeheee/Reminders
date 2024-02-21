@@ -29,12 +29,14 @@ enum SortType {
 class Folder: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
+    @Persisted var iconColor: String
     @Persisted var regDate: Date
     @Persisted var task: List<TaskTable>
     
-    convenience init(title: String) {
+    convenience init(title: String, iconColor: String = "blue") {
         self.init()
         self.title = title
+        self.iconColor = iconColor
         self.regDate = Date()
     }
 }
@@ -49,6 +51,7 @@ class TaskTable: Object {
     @Persisted var priority: Int
     @Persisted var isDone: Bool
     @Persisted var isFlagged: Bool
+    @Persisted var taskDescription: String
     @Persisted(originProperty: "task") var parent: LinkingObjects<Folder>
     
     convenience init(title: String, memo: String? = nil, deadline: Date, tag: String, priority: Int) {
@@ -61,5 +64,6 @@ class TaskTable: Object {
         self.priority = priority
         self.isDone = false
         self.isFlagged = false
+        self.taskDescription = "\(title)은 \(deadline)까지 완료되어야 하는 우선순위 \(Priority(rawValue: priority)!.title)인 업무입니다."
     }
 }
