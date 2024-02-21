@@ -9,16 +9,16 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class FolderViewController: BaseViewController {
+final class FolderViewController: BaseViewController {
     
-    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    private let repository = TaskTableRepository()
+    
+    private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     var handler: ((Folder) -> Void)?
-    
-    let repository = TaskTableRepository()
-    lazy var list = repository.fetchFolder()
-    
     var folder: Folder?
+    
+    lazy var list = repository.fetchFolder()
     lazy var selectedIndex: Int = 0
     
     override func viewDidDisappear(_ animated: Bool) {

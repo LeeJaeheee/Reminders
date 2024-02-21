@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class TagViewController: BaseViewController {
+final class TagViewController: BaseViewController {
     
-    let textField = UITextField()
+    private let textField = UITextField()
     
     var tagText: ((String) -> Void)?
     var tag: String?

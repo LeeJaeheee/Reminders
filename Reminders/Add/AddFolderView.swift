@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class AddFolderView: BaseView {
+final class AddFolderView: BaseView {
     
     let titleView = UIView()
     let titleTextField = UITextField()

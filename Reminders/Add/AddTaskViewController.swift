@@ -9,19 +9,19 @@ import UIKit
 import Toast
 
 // TODO: Flag 속성..
-class AddTaskViewController: BaseCustomViewController<AddTaskView> {
+final class AddTaskViewController: BaseCustomViewController<AddTaskView> {
+    
+    private let repository = TaskTableRepository()
+    
+    private var deadline: Date?
+    private var tag: String?
+    private var priority: Int?
+    private var image: UIImage?
+    private var folder: Folder?
     
     var handler: (() -> Void)?
     
     var data: TaskTable?
-    
-    var deadline: Date?
-    var tag: String?
-    var priority: Int?
-    var image: UIImage?
-    var folder: Folder?
-    
-    let repository = TaskTableRepository()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +40,11 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
         navigationController?.presentationController?.delegate = self
     }
     
-    @objc func leftBarButtonTapped() {
+    @objc private func leftBarButtonTapped() {
         showAlertForDismiss()
     }
     
-    @objc func rightBarButtonTapped() {
+    @objc private func rightBarButtonTapped() {
  
         view.endEditing(true)
         
@@ -74,14 +74,11 @@ class AddTaskViewController: BaseCustomViewController<AddTaskView> {
 
     }
     
-    @objc func deadlineReceivedNotification(notification: NSNotification) {
-        if let value = notification.userInfo?[AddTask.deadline] as? Date {
+    @objc private func deadlineReceivedNotification(notification: NSNotification) {
+        let taskDeadline = AddTask.deadline
+        if let value = notification.userInfo?[taskDeadline] as? Date {
             deadline = value
-            
-            // TODO: dateFormatter extension으로 처리하기
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd"
-            mainView.tableView.cellForRow(at: IndexPath(row: 0, section: AddTask.deadline.rawValue))?.detailTextLabel?.text = dateFormatter.string(from: value)
+            mainView.tableView.cellForRow(at: IndexPath(row: 0, section: taskDeadline.rawValue))?.detailTextLabel?.text = DateFormatter.displayString(from: value)
         }
     }
     
@@ -119,9 +116,7 @@ extension AddTaskViewController: UITableViewDelegate, UITableViewDataSource {
                     break
                 case .deadline:
                     deadline = data.deadline
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "MM/dd"
-                    cell.detailTextLabel?.text = dateFormatter.string(from: data.deadline)
+                    cell.detailTextLabel?.text = DateFormatter.displayString(from: data.deadline)
                 case .tag:
                     tag = data.tag
                     cell.detailTextLabel?.text = data.tag

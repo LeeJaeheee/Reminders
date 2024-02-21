@@ -8,26 +8,9 @@
 import UIKit
 import SnapKit
 
-enum Priority: Int, CaseIterable {
-    case low
-    case normal
-    case high
+final class PriorityViewController: BaseViewController {
     
-    var title: String {
-        switch self {
-        case .low:
-            "낮음"
-        case .normal:
-            "보통"
-        case .high:
-            "높음"
-        }
-    }
-}
-
-class PriorityViewController: BaseViewController {
-    
-    let segmentedControl = UISegmentedControl()
+    private let segmentedControl = UISegmentedControl()
     
     var priority: Int?
     var selectedIndex: ((Int) -> Void)?

@@ -9,16 +9,14 @@ import UIKit
 import SnapKit
 import FSCalendar
 
-class CalendarView: BaseView {
+final class CalendarView: BaseView {
     
     let calendar = FSCalendar()
-    let containerView = UIView()
     let childVC = TaskListViewController()
     
     override func configureHierarchy() {
         addSubview(calendar)
-        addSubview(containerView)
-        containerView.addSubview(childVC.view)
+        addSubview(childVC.view)
     }
     
     override func configureLayout() {
@@ -27,12 +25,9 @@ class CalendarView: BaseView {
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(8)
             make.height.equalTo(400)
         }
-        containerView.snp.makeConstraints { make in
+        childVC.view.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom).offset(8)
             make.horizontalEdges.bottom.equalTo(safeAreaInsets)
-        }
-        childVC.view.snp.makeConstraints { make in
-            make.edges.equalTo(containerView)
         }
     }
     

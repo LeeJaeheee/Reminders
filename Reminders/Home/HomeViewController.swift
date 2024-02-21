@@ -14,10 +14,10 @@ protocol HomeViewDelegate {
 }
 
 // TODO: HomeVC -> TaskListVC -> AddTaskVC 전체/목록/캘린더 여부 열거형으로 구분해서 대응하기
-class HomeViewController: BaseCustomViewController<HomeView> {
+final class HomeViewController: BaseCustomViewController<HomeView> {
 
-    let repository = TaskTableRepository()
-    lazy var folderList = repository.fetchFolder()
+    private let repository = TaskTableRepository()
+    private lazy var folderList = repository.fetchFolder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class HomeViewController: BaseCustomViewController<HomeView> {
         mainView.collectionView.dataSource = self
     }
     
-    @objc func calendarButtonTapped() {
+    @objc private func calendarButtonTapped() {
         transition(style: .push, viewController: CalendarViewController.self)
     }
 

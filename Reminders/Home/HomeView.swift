@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeView: BaseView {
+final class HomeView: BaseView {
     // iPhone 15 Pro : width는 45, height은 11
     // iPhone 15 Pro Max : width는 53, height 16 이상이어야 경고가 안뜸 왜지..?
     let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: 53, height: 16))
@@ -88,7 +88,7 @@ class HomeView: BaseView {
         collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.identifier)
     }
     
-    static func collectionViewLayout() -> UICollectionViewFlowLayout {
+    static private func collectionViewLayout() -> UICollectionViewFlowLayout {
         let spacing: CGFloat = 16
         let width = (UIScreen.main.bounds.width - (spacing * 3)) / 2
         
@@ -101,11 +101,11 @@ class HomeView: BaseView {
         return layout
     }
     
-    @objc func leftBarButtonTapped() {
+    @objc private func leftBarButtonTapped() {
         delegate?.leftBarButtonTapped()
     }
     
-    @objc func rightBarButtonTapped() {
+    @objc private func rightBarButtonTapped() {
         delegate?.rightBarButtonTapped()
     }
 }

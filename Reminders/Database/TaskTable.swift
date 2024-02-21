@@ -8,25 +8,7 @@
 import Foundation
 import RealmSwift
 
-// TODO: keyPath 공부해서 써보기
-enum SortType {
-    case title(ascending: Bool)
-    case deadline(ascending: Bool)
-    case priority(ascending: Bool)
-    
-    var sortParam: (keyPath: String, ascending: Bool) {
-        switch self {
-        case .title(let ascending):
-            ("title", ascending)
-        case .deadline(let ascending):
-            ("deadline", ascending)
-        case .priority(let ascending):
-            ("priority", ascending)
-        }
-    }
-}
-
-class Folder: Object {
+final class Folder: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
     @Persisted var iconColor: String
@@ -41,7 +23,7 @@ class Folder: Object {
     }
 }
 
-class TaskTable: Object {
+final class TaskTable: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
     @Persisted var memo: String?

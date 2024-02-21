@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeCollectionViewCell: UICollectionViewCell, ConfigureProtocol {
+final class HomeCollectionViewCell: UICollectionViewCell, ConfigureProtocol {
     
     let imageView = UIImageView()
     let titleLabel = UILabel()

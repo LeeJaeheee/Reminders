@@ -7,23 +7,23 @@
 
 import UIKit
 
-class TaskListViewController: BaseViewController {
+final class TaskListViewController: BaseViewController {
     
-    let tableView = UITableView()
-    
-    let repository = TaskTableRepository()
+    private let repository = TaskTableRepository()
     
     var collectionType = HomeCollection.all
-    lazy var navTitle = collectionType.title
-    lazy var list = repository.fetch(collectionType)
-    
     var sortParam = SortType.deadline(ascending: true).sortParam {
         didSet {
             list = repository.fetch(collectionType, sortParam: sortParam)
             tableView.reloadData()
         }
     }
-
+    
+    let tableView = UITableView()
+    
+    lazy var navTitle = collectionType.title
+    lazy var list = repository.fetch(collectionType)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,7 +52,7 @@ class TaskListViewController: BaseViewController {
         tableView.register(TaskListTableViewCell.self, forCellReuseIdentifier: TaskListTableViewCell.identifier)
     }
     
-    func setBarButton() {
+    private func setBarButton() {
         
         let items = UIMenu(title: "정렬 기준", options: [.singleSelection, .displayInline], children: [
             UIAction(title: "마감일", state: .on, handler: { _ in
@@ -86,7 +86,7 @@ class TaskListViewController: BaseViewController {
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: button), editButton]
     }
     
-    @objc func editButtonTapped(_ sender: UIBarButtonItem) {
+    @objc private func editButtonTapped(_ sender: UIBarButtonItem) {
 
         if tableView.isEditing, let selectedRows = tableView.indexPathsForSelectedRows {
             for indexPath in selectedRows {

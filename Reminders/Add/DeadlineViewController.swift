@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class DeadlineViewController: BaseViewController {
+final class DeadlineViewController: BaseViewController {
     
-    let datePicker = UIDatePicker()
+    private let datePicker = UIDatePicker()
     
     var deadline: Date?
 

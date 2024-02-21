@@ -8,10 +8,9 @@
 import UIKit
 import FSCalendar
 
-class CalendarViewController: BaseCustomViewController<CalendarView> {
+final class CalendarViewController: BaseCustomViewController<CalendarView> {
     
-    var childViewController: TaskListViewController?
-    let repository = TaskTableRepository()
+    private let repository = TaskTableRepository()
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -24,8 +23,6 @@ class CalendarViewController: BaseCustomViewController<CalendarView> {
         
         addChild(mainView.childVC)
         mainView.childVC.didMove(toParent: self)
-        
-        childViewController = mainView.childVC
         
         mainView.calendar.delegate = self
         mainView.calendar.dataSource = self
@@ -46,8 +43,8 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        childViewController?.list = repository.fetchSpecificDate(date)
-        childViewController?.tableView.reloadData()
+        mainView.childVC.list = repository.fetchSpecificDate(date)
+        mainView.childVC.tableView.reloadData()
     }
     
 }

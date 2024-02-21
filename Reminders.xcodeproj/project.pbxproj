@@ -45,6 +45,10 @@
 		D2E26F402B8483C600CF1F4B /* AddFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */; };
 		D2E26F422B8483E700CF1F4B /* AddFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F412B8483E700CF1F4B /* AddFolderView.swift */; };
 		D2E26F442B8499DA00CF1F4B /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E26F432B8499DA00CF1F4B /* FolderViewController.swift */; };
+		D2FBC7062B8638AA00B83B0C /* SortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FBC7052B8638AA00B83B0C /* SortType.swift */; };
+		D2FBC7082B864D3100B83B0C /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FBC7072B864D3100B83B0C /* DateFormatter+Extension.swift */; };
+		D2FBC70A2B86536900B83B0C /* AddTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FBC7092B86536900B83B0C /* AddTask.swift */; };
+		D2FBC70C2B86574E00B83B0C /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FBC70B2B86574E00B83B0C /* Priority.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +87,10 @@
 		D2E26F3F2B8483C600CF1F4B /* AddFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderViewController.swift; sourceTree = "<group>"; };
 		D2E26F412B8483E700CF1F4B /* AddFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFolderView.swift; sourceTree = "<group>"; };
 		D2E26F432B8499DA00CF1F4B /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
+		D2FBC7052B8638AA00B83B0C /* SortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortType.swift; sourceTree = "<group>"; };
+		D2FBC7072B864D3100B83B0C /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		D2FBC7092B86536900B83B0C /* AddTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTask.swift; sourceTree = "<group>"; };
+		D2FBC70B2B86574E00B83B0C /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +128,7 @@
 		D216332F2B7C7F66002529D6 /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
+				D2FBC7042B86383000B83B0C /* Constant */,
 				D2E26F1A2B7E0CA600CF1F4B /* Database */,
 				D21633442B7C7FB6002529D6 /* Home */,
 				D2E26F3A2B8389F900CF1F4B /* Calendar */,
@@ -143,7 +152,6 @@
 				D216334C2B7C808E002529D6 /* HomeViewController.swift */,
 				D216334E2B7C80B6002529D6 /* HomeView.swift */,
 				D2E26F1D2B7E46EA00CF1F4B /* HomeCollectionViewCell.swift */,
-				D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -208,6 +216,7 @@
 			children = (
 				D2E26F202B7E4B5800CF1F4B /* UIView+Extension.swift */,
 				D2E26F352B836E9A00CF1F4B /* FileManager.swift */,
+				D2FBC7072B864D3100B83B0C /* DateFormatter+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -228,6 +237,17 @@
 				D2E26F3D2B838A3B00CF1F4B /* CalendarView.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		D2FBC7042B86383000B83B0C /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				D2FBC7052B8638AA00B83B0C /* SortType.swift */,
+				D2E26F222B7E63F900CF1F4B /* HomeCollection.swift */,
+				D2FBC7092B86536900B83B0C /* AddTask.swift */,
+				D2FBC70B2B86574E00B83B0C /* Priority.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +351,8 @@
 				D21633562B7CE718002529D6 /* AddTaskView.swift in Sources */,
 				D2E26F3E2B838A3B00CF1F4B /* CalendarView.swift in Sources */,
 				D21633352B7C7F66002529D6 /* ViewController.swift in Sources */,
+				D2FBC7062B8638AA00B83B0C /* SortType.swift in Sources */,
+				D2FBC7082B864D3100B83B0C /* DateFormatter+Extension.swift in Sources */,
 				D21633312B7C7F66002529D6 /* AppDelegate.swift in Sources */,
 				D2E26F212B7E4B5800CF1F4B /* UIView+Extension.swift in Sources */,
 				D2E26F262B7E650400CF1F4B /* TaskListViewController.swift in Sources */,
@@ -341,6 +363,8 @@
 				D2E26F142B7DF60C00CF1F4B /* ConfigureProtocol.swift in Sources */,
 				D21633492B7C8035002529D6 /* BaseView.swift in Sources */,
 				D2E26F442B8499DA00CF1F4B /* FolderViewController.swift in Sources */,
+				D2FBC70C2B86574E00B83B0C /* Priority.swift in Sources */,
+				D2FBC70A2B86536900B83B0C /* AddTask.swift in Sources */,
 				D2E26F1C2B7E0CE200CF1F4B /* TaskTable.swift in Sources */,
 				D216334D2B7C808E002529D6 /* HomeViewController.swift in Sources */,
 				D2E26F2F2B825BA900CF1F4B /* TaskListTableViewCell.swift in Sources */,

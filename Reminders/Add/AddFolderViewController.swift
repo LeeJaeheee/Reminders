@@ -7,12 +7,12 @@
 
 import UIKit
 
-class AddFolderViewController: BaseCustomViewController<AddFolderView> {
+final class AddFolderViewController: BaseCustomViewController<AddFolderView> {
+    
+    private let repository = TaskTableRepository()
     
     var handler: (() -> Void)?
     var data: Folder?
-    
-    let repository = TaskTableRepository()
     
     override func configureView() {
         navigationItem.title = data == nil ? "새로운 목록" : "목록 정보"
@@ -25,11 +25,11 @@ class AddFolderViewController: BaseCustomViewController<AddFolderView> {
         }
     }
     
-    @objc func leftBarButtonTapped() {
+    @objc private func leftBarButtonTapped() {
         showAlertForDismiss()
     }
     
-    @objc func rightBarButtonTapped() {
+    @objc private func rightBarButtonTapped() {
  
         view.endEditing(true)
         

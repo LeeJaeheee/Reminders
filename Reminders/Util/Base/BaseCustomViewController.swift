@@ -9,7 +9,7 @@ import UIKit
 
 class BaseCustomViewController<T: BaseView>: BaseViewController {
     
-    var mainView: T = T()
+    let mainView: T = T()
     
     override func loadView() {
         self.view = mainView

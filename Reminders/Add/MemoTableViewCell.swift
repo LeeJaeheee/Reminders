@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 // TODO: 텍스트뷰 내용 길이에 따라 동적으로 늘리기
-class MemoTableViewCell: UITableViewCell, ConfigureProtocol {
+final class MemoTableViewCell: UITableViewCell, ConfigureProtocol {
 
     let titleTextField = UITextField()
     let line = UIView()

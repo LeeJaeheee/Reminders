@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TaskListTableViewCell: BaseTableViewCell {
+final class TaskListTableViewCell: BaseTableViewCell {
     
     let priorityLabel = UILabel()
     let titleLabel = UILabel()
@@ -50,16 +50,19 @@ class TaskListTableViewCell: BaseTableViewCell {
             make.trailing.equalTo(customImageView.snp.leading).offset(-12)
             make.height.equalTo(24)
         }
+        
         memoLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)
             make.horizontalEdges.equalTo(titleLabel)
         }
+        
         deadlineLabel.snp.makeConstraints { make in
             make.top.equalTo(memoLabel.snp.bottom)
             make.leading.equalTo(titleLabel)
             make.bottom.equalToSuperview().inset(8)
             make.height.equalTo(24)
         }
+        
         tagLabel.snp.makeConstraints { make in
             make.leading.equalTo(deadlineLabel.snp.trailing).offset(8)
             make.trailing.lessThanOrEqualTo(titleLabel)
@@ -99,9 +102,7 @@ class TaskListTableViewCell: BaseTableViewCell {
         memoLabel.text = data.memo
         
         DispatchQueue.main.async {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yy/MM/dd"
-            self.deadlineLabel.text = dateFormatter.string(from: data.deadline)
+            self.deadlineLabel.text = DateFormatter.displayString(from: data.deadline)
             
             self.tagLabel.text = "#" + data.tag
         }
